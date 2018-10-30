@@ -1,6 +1,4 @@
 const searchParams = new URLSearchParams(window.location.search);
-const category = searchParams.get('category');
-const cname = searchParams.get('cname');
 const postID = searchParams.get('post');
 
 const carName = document.querySelector("h2");
