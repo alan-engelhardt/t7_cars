@@ -7,6 +7,7 @@ body{
 img{
 	max-width: 100%;
 }
+
 #loader{
 	font-family: monospace;
 	position: fixed;
@@ -19,20 +20,24 @@ img{
 	padding-left: 40%;
 	line-height: 100vh;
 }
+
 .hide{
 	display: none;
 }
+
 #carlist{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 1em;
 }
+
 #carlist article{
 	border: orange solid 1px;
 	border-radius: .5em;
 	padding: .1em 1em;
 }
-#carlist a{
+
+#carlist a, #cat-nav a{
 	display: inline-block;
 	margin-top: .5em;
 	text-decoration: none;
@@ -41,6 +46,11 @@ img{
 	background-color: skyblue;
 	color: white;
 }
-#carlist a:hover{
+
+#cat-nav a{
+	margin: .5em;
+}
+
+#carlist a:hover, #cat-nav a:hover{
 	background-color: orange;
 }

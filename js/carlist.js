@@ -1,7 +1,31 @@
+"use strict"
+const urlParams = new URLSearchParams(window.location.search);
+const catID = urlParams.get("cat");
+const catNav = document.querySelector("#cat-nav");
 const listTemp = document.querySelector("#carlist-template").content;
+const baseLink = "http://ale-kea.dk/t7_18/wp-json/wp/v2/";
+
+function loadCats(){
+	fetch(baseLink+"categories").then(e=>e.json()).then(makeCatMenu);
+}
 
 function loadAll(){
 	fetch(link+"?_embed").then(e=>e.json()).then(showAll);
+}
+
+function loadCarsByCat(cat){
+	console.log(cat)
+	fetch(baseLink+"car?categories="+cat+"&_embed").then(e=>e.json()).then(showAll);
+}
+
+function makeCatMenu(data){
+	data.forEach(cat=>{
+		console.log(cat.name)
+		const newA = document.createElement("a");
+		newA.textContent=cat.name;
+		newA.href="?cat="+cat.id;
+		catNav.appendChild(newA)
+	})
 }
 
 function showAll(data){
@@ -31,4 +55,12 @@ function showAll(data){
 	clearInterval(int);
 }
 
-loadAll();
+loadCats();
+
+if(catID){
+	loadCarsByCat(catID)
+}else{
+	loadAll();
+}
+
+

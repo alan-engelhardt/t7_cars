@@ -15,7 +15,7 @@ function loadOne(id){
 }
 
 function showOne(data){
-	console.log(data._embedded['wp:featuredmedia'])
+	console.log(data._embedded['wp:term'][0][0].name)
 	if(data._embedded['wp:featuredmedia'][0].media_details.sizes.large){
 		bigImg.src=data._embedded['wp:featuredmedia'][0].media_details.sizes.large.source_url;
 	}else{
