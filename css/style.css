@@ -41,7 +41,8 @@ img{
 }
 
 #cat-nav a{
-	margin: .5em;
+	margin: 1em .2em;
+	text-transform: capitalize;
 }
 
 #carlist a:hover, #cat-nav a:hover, #details-main>article>a:hover{

@@ -1,8 +1,5 @@
 "use strict"
 const listTemp = document.querySelector("#carlist-template").content;
-
-const urlParams = new URLSearchParams(window.location.search);
-const catID = urlParams.get("cat");
 const catNav = document.querySelector("#cat-nav");
 
 function loadCats(){
@@ -18,6 +15,10 @@ function makeCatMenu(data){
 	})
 }
 
+
+const urlParams = new URLSearchParams(window.location.search);
+const catID = urlParams.get("cat");
+
 function loadCarsByCat(cat){
 	fetch(baseLink+"car?categories="+cat+"&_embed").then(e=>e.json()).then(showAll);
 }
@@ -29,7 +30,6 @@ function showAll(data){
 		const fuel = elm.acf.motor_type;
 		const km = elm.acf.km;
 		const title = elm.title.rendered;
-		const post = elm.content.rendered;
 
 		clone.querySelector("h2").textContent=title;
 		clone.querySelector(".km span").textContent=km;
