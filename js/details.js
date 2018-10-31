@@ -1,5 +1,9 @@
 const searchParams = new URLSearchParams(window.location.search);
-const postID = searchParams.get('post');
+const postID = searchParams.get('id');
+
+function loadOne(id){
+	fetch(baseLink+"car/"+id+"?_embed").then(e=>e.json()).then(showOne);
+}
 
 const carName = document.querySelector("h2");
 const price = document.querySelector("h3 span");
@@ -10,12 +14,7 @@ const firstReg = document.querySelector(".first-reg span");
 const bigImg = document.querySelector(".bigimg");
 const body = document.querySelector("#body");
 
-function loadOne(id){
-	fetch(link+id+"?_embed").then(e=>e.json()).then(showOne);
-}
-
 function showOne(data){
-	console.log(data._embedded['wp:term'][0][0].name)
 	if(data._embedded['wp:featuredmedia'][0].media_details.sizes.large){
 		bigImg.src=data._embedded['wp:featuredmedia'][0].media_details.sizes.large.source_url;
 	}else{

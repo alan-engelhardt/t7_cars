@@ -1,7 +1,5 @@
 body{
 	font-family: sans-serif;
-	width: 70vw;
-	margin: auto;
 }
 
 img{
@@ -25,19 +23,14 @@ img{
 	display: none;
 }
 
-#carlist{
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 1em;
-}
-
 #carlist article{
+	margin-bottom: 1em;
 	border: orange solid 1px;
 	border-radius: .5em;
 	padding: .1em 1em;
 }
 
-#carlist a, #cat-nav a{
+#carlist a, #cat-nav a, #details-main>article>a{
 	display: inline-block;
 	margin-top: .5em;
 	text-decoration: none;
@@ -51,6 +44,24 @@ img{
 	margin: .5em;
 }
 
-#carlist a:hover, #cat-nav a:hover{
+#carlist a:hover, #cat-nav a:hover, #details-main>article>a:hover{
 	background-color: orange;
+}
+
+#details-main img{
+	border: 1px solid orange;
+	padding: 1em;
+	border-radius: 1em;
+}
+
+@media screen and (min-width: 800px){
+	body{
+		width: 70vw;
+		margin: auto;
+	}
+	#carlist{
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 1em;
+	}
 }
