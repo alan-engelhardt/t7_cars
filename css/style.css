@@ -30,7 +30,7 @@ img{
 	padding: .1em 1em;
 }
 
-#carlist a, #cat-nav a, #details-main>article>a{
+#carlist a, #cat-nav a, body>a{
 	display: inline-block;
 	margin-top: .5em;
 	text-decoration: none;
