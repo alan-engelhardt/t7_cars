@@ -1,6 +1,12 @@
-const template = document.querySelector("#detailTemplate").content;
+const template = document.querySelector("#detailTemplate").content;const params = new URLSearchParams(window.location.search);
+const carID = params.get("carid");
+
+function loadOne(carID){
+	fetch(baseLink+"car/"+carID+"?_embed").then(e=>e.json()).then(showOne);
+}
 
 function showOne(data){
+	console.log(data);
 	const clone = template.cloneNode(true);
 	const bigImg = clone.querySelector(".bigimg");
 
@@ -16,10 +22,10 @@ function showOne(data){
 	clone.querySelector(".mtype span").textContent = data.acf.motor_type;
 	clone.querySelector("h2").textContent = data.title.rendered;
 	clone.querySelector("#body").innerHTML = data.content.rendered;
-	detmain.appendChild(clone);
+	main.appendChild(clone);
 
 	loader.classList.add("hide");
 	clearInterval(int);
 }
 
-loadOne(postID);
+loadOne(carID);

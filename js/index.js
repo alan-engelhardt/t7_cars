@@ -1,13 +1,34 @@
-"use strict"
-const loader = document.querySelector("#loader");
-const main = document.querySelector("main");
-const baseLink = "http://ale-kea.dk/t7_18/wp-json/wp/v2/";
-
-let int = setInterval(function(){
-	loader.textContent+="."
-}, 200);
-
 const listTemp = document.querySelector("#carlist-template").content;
+const nav = document.querySelector("#cat-nav");
+
+const params = new URLSearchParams(window.location.search);
+const catID = params.get("catid");
+
+if(catID){
+	loadCarsByCat(catID);
+}else{
+	loadAll();
+}
+
+function loadCategories(){
+	fetch(baseLink+"categories").then(e=>e.json()).then(makeCatMenu);
+}
+
+function loadCarsByCat(catID){
+	fetch(baseLink+"car?categories="+catID+"&_embed").then(e=>e.json()).then(showAll);
+}
+
+function makeCatMenu(cats){
+	cats.forEach(cat=>{
+		console.log(cat);
+		const newA = document.createElement("a");
+		newA.textContent=cat.name;
+		newA.href="?catid="+cat.id;
+		nav.appendChild(newA);
+	})
+}
+
+loadCategories();
 
 function showAll(data){
 	data.forEach(elm=>{
@@ -21,7 +42,7 @@ function showAll(data){
 		clone.querySelector(".km span").textContent=km;
 		clone.querySelector(".mtype span").textContent=fuel;
 		clone.querySelector("h3 span").textContent=price;
-		console.log(elm.id);
+		//console.log(elm.id);
 		clone.querySelector("a").href="details.html?carid="+elm.id;
 
 		if(elm._embedded['wp:featuredmedia']){
@@ -40,4 +61,5 @@ function loadAll(){
 	fetch(baseLink+"car?_embed").then(e=>e.json()).then(showAll);
 }
 
-loadAll();
+
+
