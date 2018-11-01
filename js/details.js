@@ -1,11 +1,4 @@
-const searchParams = new URLSearchParams(window.location.search);
-const postID = searchParams.get('id');
-const detmain = document.querySelector("#details-main");
 const template = document.querySelector("#detailTemplate").content;
-
-function loadOne(id){
-	fetch(baseLink+"car/"+id+"?_embed").then(e=>e.json()).then(showOne);
-}
 
 function showOne(data){
 	const clone = template.cloneNode(true);
@@ -30,4 +23,3 @@ function showOne(data){
 }
 
 loadOne(postID);
-
