@@ -3,6 +3,9 @@ const nav = document.querySelector("#cat-nav");
 
 const params = new URLSearchParams(window.location.search);
 const catID = params.get("catid");
+const srt = params.get("sort");
+
+console.log(srt)
 
 if(catID){
 	loadCarsByCat(catID);
@@ -20,7 +23,7 @@ function loadCarsByCat(catID){
 
 function makeCatMenu(cats){
 	cats.forEach(cat=>{
-		console.log(cat);
+		//console.log(cat);
 		const newA = document.createElement("a");
 		newA.textContent=cat.name;
 		newA.href="?catid="+cat.id;
@@ -58,8 +61,20 @@ function showAll(data){
 }
 
 function loadAll(){
-	fetch(baseLink+"car?_embed").then(e=>e.json()).then(showAll);
+	//fetch(baseLink+"car?_embed").then(e=>e.json()).then(showAll);
+	fetch(baseLink+"car?_embed").then(e=>e.json()).then(sortData);
 }
 
-
+function sortData(data){
+	if(srt == "acc"){
+		data.sort(function(a, b){
+			return a.acf.first_registration - b.acf.first_registration
+		})
+	}else if(srt == "dec"){
+		data.sort(function(a, b){
+			return b.acf.first_registration - a.acf.first_registration
+		})
+	}
+	showAll(data)
+}
 

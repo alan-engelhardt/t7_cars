@@ -41,7 +41,15 @@ img{
 }
 
 #cat-nav a{
-	margin: 1em .2em;
+	display: block;
+}
+
+#carlist article a{
+	display: block;
+	width: 6em;
+}
+
+#cat-nav a{
 	text-transform: capitalize;
 }
 
@@ -55,14 +63,33 @@ img{
 	border-radius: 1em;
 }
 
-@media screen and (min-width: 800px){
+#carlist{
+	margin-top: 1em;
+/*	width: 70vw;*/
+}
+
+.wp-block-gallery{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.blocks-gallery-item{
+
+}
+
+@media screen and (min-width: 700px){
 	body{
 		width: 70vw;
 		margin: auto;
 	}
 	#carlist{
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 		grid-gap: 1em;
+	}
+	#cat-nav a{
+		margin: 1em .2em;
+		display: inline-block;
 	}
 }
