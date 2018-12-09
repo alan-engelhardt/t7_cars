@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>test</title>
-</head>
-<body>
-<a href="?id=10&name=Alan">send vars</a>
-	<script>
-		const searchParams = new URLSearchParams(window.location.search);
-		const name = searchParams.get("name");
-		const id = searchParams.get("id");
-		console.log(name, id);
-	</script>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>test</title>
+	</head>
+	<body>
+	<h1 id="display"><span id="min">00</span>:<span id="sec">00</span>:0<span id="tnth">00</span></h1>
+	<button id="stop">stop</button>
+	<button id="start">start</button>
+		<script>
+			let intv, counter = 0;
+			let stopBtn = document.querySelector("#stop");
+			let startBtn = document.querySelector("#start");
+			stopBtn.addEventListener("click", ()=>clearInterval(intv))
+			startBtn.addEventListener("click", timer)
+
+			function timer(){
+				intv = setInterval(function(){
+					counter++
+					tnth.textContent=counter%10
+					sec.textContent=add0(Math.floor((counter%600)/10))
+					min.textContent=add0(Math.floor(counter%(60*60)/600))
+				}, 100)
+			}
+
+			function add0(counter){
+				if(counter<10){
+					return "0"+counter
+				}else{
+					return counter
+				}
+			}
+			timer()
+		</script>
+	</body>
 </html>
