@@ -5,6 +5,8 @@ const params = new URLSearchParams(window.location.search);
 const catID = params.get("catid");
 const srt = params.get("sort");
 
+let savedData = [];
+
 console.log(srt)
 
 if(catID){
@@ -33,7 +35,13 @@ function makeCatMenu(cats){
 
 loadCategories();
 
+function sortD(elm){
+	return elm.acf.motor_type == "Diesel"
+}
+
 function showAll(data){
+	console.log(data.filter(sortD));
+
 	data.forEach(elm=>{
 		const clone = listTemp.cloneNode(true);
 		const price = elm.acf.price;
@@ -45,7 +53,6 @@ function showAll(data){
 		clone.querySelector(".km span").textContent=km;
 		clone.querySelector(".mtype span").textContent=fuel;
 		clone.querySelector("h3 span").textContent=price;
-		//console.log(elm.id);
 		clone.querySelector("a").href="details.html?carid="+elm.id;
 
 		if(elm._embedded['wp:featuredmedia']){
