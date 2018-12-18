@@ -1,17 +1,9 @@
 const listTemp = document.querySelector("#carlist-template").content;
 const nav = document.querySelector("#cat-nav");
-
 const params = new URLSearchParams(window.location.search);
-const catID = params.get("catid");
 const srt = params.get("sort");
 
 let savedData = [];
-
-if(catID){
-	loadCarsByCat(catID);
-}else{
-	loadAll();
-}
 
 function loadCategories(){
 	fetch(baseLink+"categories").then(e=>e.json()).then(makeCatMenu);
@@ -24,10 +16,6 @@ function loadAll(){
 function saveData(data){
 	savedData = data;
 	sortData(savedData);
-}
-
-function loadCarsByCat(catID){
-	fetch(baseLink+"car?categories="+catID+"&_embed").then(e=>e.json()).then(saveData);
 }
 
 function sortData(data){
@@ -48,14 +36,18 @@ function makeCatMenu(cats){
 		const newA = document.createElement("a");
 		newA.textContent=cat.name;
 		newA.href="#";
-		newA.setAttribute("data-catId", cat.id)
+		newA.setAttribute("data-catid", cat.id)
 		newA.addEventListener("click", e=>filterData(e))
 		nav.appendChild(newA);
 	})
 }
 
 function filterData(e){
-	showAll(savedData.filter(elm=>elm.acf.motor_type == e.target.textContent))
+	const catID = parseInt(e.target.getAttribute("data-catid"))
+	const filteredData = savedData.filter(elm=>elm.categories.includes(catID))
+	showAll(filteredData)
+
+	//showAll(savedData.filter(elm=>elm.acf.motor_type == e.target.textContent))
 }
 
 function showAll(data){
@@ -87,3 +79,4 @@ function showAll(data){
 }
 
 loadCategories();
+loadAll();
